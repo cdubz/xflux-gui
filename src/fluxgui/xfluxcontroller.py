@@ -66,7 +66,7 @@ class XfluxController(object):
             startup_args = self._create_startup_arg_list(self._current_color,
                 **self.init_kwargs)
         try:
-            startup_args += ["-r", "0", "-nofork"]  # -r 0 must come last.
+            startup_args += ["-r", "0", "-nofork"]  # -nofork must come last.
             previous_instances = pexpect.run('pgrep -d, -u %s xflux' % pexpect.run('whoami')).strip()
             if previous_instances != "":
                 for process in previous_instances.split(","):
