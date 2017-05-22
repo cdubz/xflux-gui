@@ -16,20 +16,46 @@ program is responsible for actually changing the color of your
 screen. See https://justgetflux.com/linux.html for more information
 about `xflux`.
 
+This fork
+---------
+**This is a fork of the official `fluxgui` project and is only 
+intended to be used as a temporary workaround. See 
+https://github.com/xflux-gui/xflux-gui for the latest version of
+`fluxgui`.**
+
+This fork is a very slightly modified `fluxgui` applet that *may* work
+in situations where the standard applet does not. Specifically, this 
+fork was created as a workaround to issues with Ubuntu-based systems
+using certain NVidia graphics cards and drivers. See 
+https://forum.justgetflux.com/topic/2373/ for more discussion.
+
+If you execute `xflux` in a terminal and receive an error message 
+similar to the one below, this fork may help you.
+
+```
+Welcome to xflux (f.lux for X)
+This will only work if you're running X on console.
+
+Found 1 screen.
+Sorry, we only support 8 and 10-bit displays right now.
+```
+
 Install Instructions
 --------------------
 
-### Ubuntu PPA Package Manager Install
+### Remove PPA Version
 
-There is a PPA here:
+If you have previously installed `fluxgui` from a PPA, you'll need to
+uninstall that first:
 
-https://launchpad.net/~nathan-renniewaldock/+archive/ubuntu/flux
-
-See [ubuntuhandbook.org instructions](http://ubuntuhandbook.org/index.php/2016/03/install-f-lux-in-ubuntu-16-04/) for more details on using the PPA to install xflux using the package manager.
-
-If you have trouble with the PPA version try the manual install below.
+```bash
+sudo apt-get remove fluxgui
+```
 
 ### Ubuntu/Debian Manual Install
+
+Next, follow the typical manual install instructions, using this 
+repository:
 
 ```bash
 # Install dependencies
@@ -37,7 +63,7 @@ sudo apt-get install git python-appindicator python-xdg python-pexpect python-gc
 
 # Download xflux-gui
 cd /tmp
-git clone "https://github.com/xflux-gui/xflux-gui.git"
+git clone "https://github.com/cdubz/xflux-gui.git"
 cd xflux-gui
 python download-xflux.py
 
@@ -51,11 +77,24 @@ python setup.py install --user
 fluxgui
 ```
 
+### Ubuntu/Debian Launcher
+
+To take advantage of the launchcer, simply copying from the `desktop`
+folder to the appropriate location on your system. E.g.:
+
+```bash
+# From the cloned repo directory
+
+# EITHER install globally
+sudo cp desktop/fluxgui.desktop /usr/share/applications
+# EXCLUSIVE OR, loccally
+cp desktop/fluxgui.desktop ~/.local/share/applications
+```
+
 ### Ubuntu/Debian Manual Uninstall
 
-If you manually installed instead of using the PPA, you can uninstall
-by making `setup.py` tell you where it installed files and then
-removing the installed files.
+Uninstall by making `setup.py` tell you where it installed files and
+then removing the installed files.
 
 ```bash
 # EITHER uninstall globally
@@ -70,30 +109,4 @@ xargs rm -vr < installed.txt
 License
 -------
 
-The f.lux indicator applet is released under the [MIT License](https://github.com/xflux-gui/xflux-gui/blob/master/LICENSE).
-
-Developing
-----------
-
-### Running `fluxgui` Without Installing
-
-When working on `fluxgui`, you can use
-```bash
-cd <path to your xflux-gui.git clone>
-# You only need to download xflux once.
-python download-xflux.py
-PATH=`pwd`:$PATH PYTHONPATH=`pwd`/src:$PYTHONPATH ./fluxgui &
-```
-to test your local copy of `fluxgui` without installing anything.
-
-### Change Logs, Versions, Releases
-
-Note changes in `./debian/changelog`.
-
-Use version `<ver>~pre` until ready to release a version. When
-releasing a version make branch, remove the `~pre` suffix from the
-version strings in the branch, and tag the branch `v<ver>`.
-
-When releasing the version string needs to be changed in
-`debian/changelog` and `setup.py`, and the release dates needs to be
-added in `debian/changelog`.
+The f.lux indicator applet is released under the [MIT License](https://github.com/cdubz/xflux-gui/blob/master/LICENSE).
