@@ -79,7 +79,7 @@ fluxgui
 
 ### Ubuntu/Debian Launcher
 
-To take advantage of the launchcer, simply copying from the `desktop`
+To take advantage of the launcher, simply copy it from the `desktop`
 folder to the appropriate location on your system. E.g.:
 
 ```bash
@@ -94,7 +94,7 @@ cp desktop/fluxgui.desktop ~/.local/share/applications
 ### Ubuntu/Debian Manual Uninstall
 
 Uninstall by making `setup.py` tell you where it installed files and
-then removing the installed files.
+then removing the installed files:
 
 ```bash
 # EITHER uninstall globally
@@ -109,4 +109,5 @@ xargs rm -vr < installed.txt
 License
 -------
 
-The f.lux indicator applet is released under the [MIT License](https://github.com/cdubz/xflux-gui/blob/master/LICENSE).
+This fork of the f.lux indicator applet is released under the 
+[MIT License](https://github.com/cdubz/xflux-gui/blob/master/LICENSE).
